@@ -3,6 +3,7 @@ package server
 import (
 	"errors"
 	"fmt"
+	"github.com/tbuchaillot/dkvs/node/databases"
 	"github.com/tbuchaillot/dkvs/node/server/operations"
 	"log"
 	"net"
@@ -12,10 +13,13 @@ import (
 type Server struct{
 	listener net.Listener
 	grpcServer *grpc.Server
+	db databases.Database
 }
 
-func NewServer() (*Server,error){
-	newServer := &Server{}
+func NewServer(db databases.Database) (*Server,error){
+	newServer := &Server{
+		db : db,
+	}
 
 	lis, err := net.Listen("tcp", ":9000")
 	if err != nil {
@@ -34,9 +38,8 @@ func NewServer() (*Server,error){
 }
 
 func (srv *Server) registerServices(){
-	operationServer := operations.Server{}
-	operations.RegisterChatServiceServer(srv.grpcServer, &operationServer)
-
+	operationServer := operations.NewOperationService(srv.db)
+	operations.RegisterOperationServiceServer(srv.grpcServer, operationServer)
 }
 
 func (srv *Server) Serve() error{

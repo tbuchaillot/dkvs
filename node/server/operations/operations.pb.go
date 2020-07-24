@@ -29,16 +29,17 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type Message struct {
+type ResponseMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Body string `protobuf:"bytes,1,opt,name=body,proto3" json:"body,omitempty"`
+	Success bool   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Error   string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
-func (x *Message) Reset() {
-	*x = Message{}
+func (x *ResponseMessage) Reset() {
+	*x = ResponseMessage{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_operations_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +47,13 @@ func (x *Message) Reset() {
 	}
 }
 
-func (x *Message) String() string {
+func (x *ResponseMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message) ProtoMessage() {}
+func (*ResponseMessage) ProtoMessage() {}
 
-func (x *Message) ProtoReflect() protoreflect.Message {
+func (x *ResponseMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_operations_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,14 +65,186 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Message.ProtoReflect.Descriptor instead.
-func (*Message) Descriptor() ([]byte, []int) {
+// Deprecated: Use ResponseMessage.ProtoReflect.Descriptor instead.
+func (*ResponseMessage) Descriptor() ([]byte, []int) {
 	return file_operations_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Message) GetBody() string {
+func (x *ResponseMessage) GetSuccess() bool {
 	if x != nil {
-		return x.Body
+		return x.Success
+	}
+	return false
+}
+
+func (x *ResponseMessage) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+type ResponseMessageWithValue struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Error   string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Value   []byte `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *ResponseMessageWithValue) Reset() {
+	*x = ResponseMessageWithValue{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_operations_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ResponseMessageWithValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseMessageWithValue) ProtoMessage() {}
+
+func (x *ResponseMessageWithValue) ProtoReflect() protoreflect.Message {
+	mi := &file_operations_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResponseMessageWithValue.ProtoReflect.Descriptor instead.
+func (*ResponseMessageWithValue) Descriptor() ([]byte, []int) {
+	return file_operations_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ResponseMessageWithValue) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *ResponseMessageWithValue) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+func (x *ResponseMessageWithValue) GetValue() []byte {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+type SetKeyParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value []byte `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *SetKeyParams) Reset() {
+	*x = SetKeyParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_operations_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetKeyParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyParams) ProtoMessage() {}
+
+func (x *SetKeyParams) ProtoReflect() protoreflect.Message {
+	mi := &file_operations_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyParams.ProtoReflect.Descriptor instead.
+func (*SetKeyParams) Descriptor() ([]byte, []int) {
+	return file_operations_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SetKeyParams) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *SetKeyParams) GetValue() []byte {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+type GetKeyParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+}
+
+func (x *GetKeyParams) Reset() {
+	*x = GetKeyParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_operations_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetKeyParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetKeyParams) ProtoMessage() {}
+
+func (x *GetKeyParams) ProtoReflect() protoreflect.Message {
+	mi := &file_operations_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetKeyParams.ProtoReflect.Descriptor instead.
+func (*GetKeyParams) Descriptor() ([]byte, []int) {
+	return file_operations_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetKeyParams) GetKey() string {
+	if x != nil {
+		return x.Key
 	}
 	return ""
 }
@@ -80,15 +253,34 @@ var File_operations_proto protoreflect.FileDescriptor
 
 var file_operations_proto_rawDesc = []byte{
 	0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x12, 0x0a, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x1d,
-	0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x62, 0x6f, 0x64,
-	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x32, 0x45, 0x0a,
-	0x0b, 0x43, 0x68, 0x61, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x36, 0x0a, 0x08,
-	0x53, 0x61, 0x79, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x13, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x13, 0x2e,
-	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x6f, 0x12, 0x0a, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x41,
+	0x0a, 0x0f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x65,
+	0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f,
+	0x72, 0x22, 0x60, 0x0a, 0x18, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x57, 0x69, 0x74, 0x68, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x18, 0x0a,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07,
+	0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x14, 0x0a,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x76, 0x61,
+	0x6c, 0x75, 0x65, 0x22, 0x36, 0x0a, 0x0c, 0x53, 0x65, 0x74, 0x4b, 0x65, 0x79, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x20, 0x0a, 0x0c, 0x47,
+	0x65, 0x74, 0x4b, 0x65, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6b,
+	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x32, 0xa1, 0x01,
+	0x0a, 0x10, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x12, 0x41, 0x0a, 0x06, 0x53, 0x65, 0x74, 0x4b, 0x65, 0x79, 0x12, 0x18, 0x2e, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x53, 0x65, 0x74, 0x4b, 0x65, 0x79,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x1b, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x22, 0x00, 0x12, 0x4a, 0x0a, 0x06, 0x47, 0x65, 0x74, 0x4b, 0x65, 0x79, 0x12,
+	0x18, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x47, 0x65, 0x74,
+	0x4b, 0x65, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x24, 0x2e, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x57, 0x69, 0x74, 0x68, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22,
+	0x00, 0x42, 0x02, 0x5a, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -103,15 +295,20 @@ func file_operations_proto_rawDescGZIP() []byte {
 	return file_operations_proto_rawDescData
 }
 
-var file_operations_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_operations_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_operations_proto_goTypes = []interface{}{
-	(*Message)(nil), // 0: operations.Message
+	(*ResponseMessage)(nil),          // 0: operations.ResponseMessage
+	(*ResponseMessageWithValue)(nil), // 1: operations.ResponseMessageWithValue
+	(*SetKeyParams)(nil),             // 2: operations.SetKeyParams
+	(*GetKeyParams)(nil),             // 3: operations.GetKeyParams
 }
 var file_operations_proto_depIdxs = []int32{
-	0, // 0: operations.ChatService.SayHello:input_type -> operations.Message
-	0, // 1: operations.ChatService.SayHello:output_type -> operations.Message
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 0: operations.OperationService.SetKey:input_type -> operations.SetKeyParams
+	3, // 1: operations.OperationService.GetKey:input_type -> operations.GetKeyParams
+	0, // 2: operations.OperationService.SetKey:output_type -> operations.ResponseMessage
+	1, // 3: operations.OperationService.GetKey:output_type -> operations.ResponseMessageWithValue
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -124,7 +321,43 @@ func file_operations_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_operations_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Message); i {
+			switch v := v.(*ResponseMessage); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_operations_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ResponseMessageWithValue); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_operations_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SetKeyParams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_operations_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetKeyParams); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -142,7 +375,7 @@ func file_operations_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_operations_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -164,72 +397,108 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// ChatServiceClient is the client API for ChatService service.
+// OperationServiceClient is the client API for OperationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ChatServiceClient interface {
-	SayHello(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+type OperationServiceClient interface {
+	SetKey(ctx context.Context, in *SetKeyParams, opts ...grpc.CallOption) (*ResponseMessage, error)
+	GetKey(ctx context.Context, in *GetKeyParams, opts ...grpc.CallOption) (*ResponseMessageWithValue, error)
 }
 
-type chatServiceClient struct {
+type operationServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewChatServiceClient(cc grpc.ClientConnInterface) ChatServiceClient {
-	return &chatServiceClient{cc}
+func NewOperationServiceClient(cc grpc.ClientConnInterface) OperationServiceClient {
+	return &operationServiceClient{cc}
 }
 
-func (c *chatServiceClient) SayHello(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
-	out := new(Message)
-	err := c.cc.Invoke(ctx, "/operations.ChatService/SayHello", in, out, opts...)
+func (c *operationServiceClient) SetKey(ctx context.Context, in *SetKeyParams, opts ...grpc.CallOption) (*ResponseMessage, error) {
+	out := new(ResponseMessage)
+	err := c.cc.Invoke(ctx, "/operations.OperationService/SetKey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ChatServiceServer is the server API for ChatService service.
-type ChatServiceServer interface {
-	SayHello(context.Context, *Message) (*Message, error)
+func (c *operationServiceClient) GetKey(ctx context.Context, in *GetKeyParams, opts ...grpc.CallOption) (*ResponseMessageWithValue, error) {
+	out := new(ResponseMessageWithValue)
+	err := c.cc.Invoke(ctx, "/operations.OperationService/GetKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedChatServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedChatServiceServer struct {
+// OperationServiceServer is the server API for OperationService service.
+type OperationServiceServer interface {
+	SetKey(context.Context, *SetKeyParams) (*ResponseMessage, error)
+	GetKey(context.Context, *GetKeyParams) (*ResponseMessageWithValue, error)
 }
 
-func (*UnimplementedChatServiceServer) SayHello(context.Context, *Message) (*Message, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+// UnimplementedOperationServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedOperationServiceServer struct {
 }
 
-func RegisterChatServiceServer(s *grpc.Server, srv ChatServiceServer) {
-	s.RegisterService(&_ChatService_serviceDesc, srv)
+func (*UnimplementedOperationServiceServer) SetKey(context.Context, *SetKeyParams) (*ResponseMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetKey not implemented")
+}
+func (*UnimplementedOperationServiceServer) GetKey(context.Context, *GetKeyParams) (*ResponseMessageWithValue, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKey not implemented")
 }
 
-func _ChatService_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Message)
+func RegisterOperationServiceServer(s *grpc.Server, srv OperationServiceServer) {
+	s.RegisterService(&_OperationService_serviceDesc, srv)
+}
+
+func _OperationService_SetKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetKeyParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatServiceServer).SayHello(ctx, in)
+		return srv.(OperationServiceServer).SetKey(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/operations.ChatService/SayHello",
+		FullMethod: "/operations.OperationService/SetKey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatServiceServer).SayHello(ctx, req.(*Message))
+		return srv.(OperationServiceServer).SetKey(ctx, req.(*SetKeyParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ChatService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "operations.ChatService",
-	HandlerType: (*ChatServiceServer)(nil),
+func _OperationService_GetKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKeyParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperationServiceServer).GetKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/operations.OperationService/GetKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperationServiceServer).GetKey(ctx, req.(*GetKeyParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _OperationService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "operations.OperationService",
+	HandlerType: (*OperationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _ChatService_SayHello_Handler,
+			MethodName: "SetKey",
+			Handler:    _OperationService_SetKey_Handler,
+		},
+		{
+			MethodName: "GetKey",
+			Handler:    _OperationService_GetKey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

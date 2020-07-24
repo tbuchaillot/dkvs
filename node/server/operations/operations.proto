@@ -1,12 +1,30 @@
 syntax = "proto3";
-        package operations;
-        option go_package="";
+package operations;
+option go_package="";
 
 
-        message Message {
-            string body = 1;
-        }
+message ResponseMessage {
+    bool success = 1;
+    string error = 2;
+}
 
-        service ChatService {
-            rpc SayHello(Message) returns (Message) {}
-        }
+message ResponseMessageWithValue {
+  bool success = 1;
+  string error = 2;
+  bytes value = 3;
+}
+
+
+message SetKeyParams{
+  string key = 1;
+  bytes value = 2;
+}
+
+message GetKeyParams{
+  string key = 1;
+}
+
+service OperationService {
+    rpc SetKey(SetKeyParams) returns (ResponseMessage) {}
+    rpc GetKey(GetKeyParams) returns (ResponseMessageWithValue) {}
+}

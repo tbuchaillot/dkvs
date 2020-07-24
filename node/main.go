@@ -24,7 +24,7 @@ func main(){
 	}
 	defer db.Close()
 
-	srv, err := server.NewServer()
+	srv, err := server.NewServer(db)
 	if err != nil {
 		log.Fatalf("Unable to initiliaze server error %v", err)
 
